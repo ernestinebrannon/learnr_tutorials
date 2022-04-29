@@ -4,4 +4,3 @@ The McNair Data Science Series aims to teach basic principles of data science, p
 - Intro to R
 - Data Structures
 - Data Visualization with Ggplots2
--
