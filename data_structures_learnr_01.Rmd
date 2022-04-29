@@ -1,0 +1,227 @@
+---
+title: "Data Structures Pt1"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+```{r setup, include=FALSE}
+
+library(learnr)
+```
+## Welcome!
+
+You can write and execute code within this tutorial, *however* I recommended following the instructions and completing the challenges in Rstudio in order help you gain proficiency in navigating Rstudio.
+
+
+
+## Create a data frame
+
+Before we start examining data types, let's start with getting some data! 
+
+We'll being by creating a data frame by creating a lists of lists (of vectors actually) using the `data.frame()` and combine `c()`  functions.
+
+- We will create an object named `cats` and assign it the values withing our data frame using the `data.frame()` function. 
+- Within this function we will name our different variables `coat`, `weight`, and `likes_strings`.
+- Each of these variables will be assigned a list of values using the combine `c()` function. 
+
+See example:
+
+
+```{r catsdf,exercise= TRUE, eval=FALSE}
+cats<- data.frame(coat = c("calico", "black", "tabby"),
+                  weight = c(2.1, 5.0,3.2),
+                  likes_string = c(1,0,1))
+cats
+```
+
+## Challenge 1
+
+**Challenge 1: Create a new data frame ** 
+
+- Save the data frame as an object named `office`
+- Inside the `data.frame()` function, you will list your variables and their values just like we did for the `cats` data frame.
+-  Each variable will be assined a list of values using the `c` function. **Example:** `coats=c("tabby","calico")` in this example the variable `coats` has the two values- tabby and calico. 
+- variables: `people`, `age`, `loves_beets`, `loves_jim`
+
+- For `people` use the values : "Jim", "Pam", "Michael", "Dwight"
+
+- For `age` use the values : 28, 26, 42, 35
+
+- For `loves_beets` use the values: 0,1,0,1
+
+- For `loves_jim` use the values : 1, 1, 1, 0
+
+```{r df, eval=FALSE, exercise = TRUE, exercise.reveal_solution =TRUE}
+
+```
+
+**Syntax clue :
+`objectname<-data.frame(variable1 =c(value1,value2),
+variable2 = c(another_value,and_anothervalue))`**
+
+<div id= "df-hint">
+**Hint** Here is the code for a similar data frame:
+
+```{r}
+office<- data.frame(people = c("Creed", "Meredith"), age = c(29,40), loves_beets = c(1,1), loves_jim=c(0,0))
+```
+
+</div>
+
+## Pull columns
+```{r prepare-cats}
+cats<- data.frame(coat = c("calico", "black", "tabby"),
+                  weight = c(2.1, 5.0,3.2),
+                  likes_string = c(1,0,1))
+```
+
+
+To pull a column from a data frame use the syntax `dataframe_name$column_name`.
+
+Run this code, and consider the output. 
+
+```{r pullcoats, eval = FALSE, exercise =TRUE, exercise.setup="prepare-cats"}
+cats$coat
+
+```
+
+**Exercise: Pulling Collumns**
+PUll the other two columns (`weight`, and `likes_string`) from the `cats` dataframe.
+
+```{r pullexercise01,exercise = TRUE, exercise.setup="prepare-cats", eval =FALSE} 
+
+```
+
+## Challenge 2
+```{r prepare-office}
+office<- data.frame(people=c("Jim","Pam","Michael","Dwight"), age = c(28,26,42,35),loves_beets = c(0,1,0,1), loves_jim = c(1,1,1,0))
+```
+
+### Challenge 2a
+
+**Challenge 2: Pulling Collumns**
+Pull the `people` column from the `office` data frame. 
+
+```{r pullofficecol, eval= FALSE, exercise = TRUE, exercise.setup = "prepare-office"}
+
+```
+<div id = "pullofficecol-hint">
+
+To pull the `loves_beets` column from the `office` data frame use the following code:
+
+```{r pullcolex, eval=FALSE, exercise = TRUE, exercise.setup = "prepare-office"}
+office$loves_beets
+```
+</div>
+
+Try pulling some of the other columns. 
+
+```{r pullofficecol2, eval= FALSE, exercise = TRUE, exercise.setup = "prepare-office"}
+
+```
+
+
+## Operations on Columns
+
+We can perform different operations on the values in the data frame. 
+
+Run this chunk of code and take note of the output.
+
+```{r columnop, eval=FALSE, exercise = TRUE, exercise.setup = "prepare-cats"}
+cats$weight+2
+```
+
+Now consider the result when we call on the column `cats$weight` again. 
+
+```{r checkcatweight, eval= FALSE, exercise = TRUE, exercise.setup = "prepare-cats"}
+cats$weight
+```
+
+Is the output what you expected? 
+
+How does the following code's results differ? Why?
+
+```{r reassigncatweight, eval=FALSE, exercise = TRUE, exercise.setup="prepare-cats"}
+cats$weight<- cats$weight +2
+cats$weight
+
+```
+
+
+## Challenge 3
+
+**Column Operations**
+
+Add 2 years to everyone's age in the `office` data frame you created in challenge 1.**
+
+```{r addtoage, eval=FALSE, exercise=TRUE, exercise.setup="prepare-office"}
+
+```
+
+<div id= "addtoage-hint">
+**Hint:** First pull the `age` collum from the `office` data frame using the `$` symbol then add two to the colum using `+ 2 `.
+
+</div>
+
+**Paste() Function**
+
+Use the `paste()` function to create a series of sentences that say each person age.
+
+```{r pasteoffice, eval=FALSE, exercise = TRUE, exercise.setup="prepare-office"}
+
+```
+
+<div id= "pasteoffice-hint">
+You will use a similar syntax as the example below:
+```{r pastehint, eval=FALSE, exercise = TRUE, exercise.setup="prepare-cats"}
+paste("My cat is a ", cats$coat, "and weighs", cats$weight)
+```
+
+</div>
+
+## Data Types
+
+**There are 5 main data types:**
+
+- `double`: or `numeric`, all real numbers with or without decimals
+
+- `integer`: real numbers without decimal, can use the suffix `L` to specify data as an integer
+
+- `complex`: imaginary va
+lue, use the suffix `i` to specify data as `complex`
+- `logical`: also known as `boolean`; is either `TRUE` or `FALSE`
+
+- `character`: a string or set of characters, use single quotes `' '` or double quotes `" "` to specify data as a characters
+
+No matter how complicated our analyses become, all data in R is interpreted as one of these basic data types. This strictness has some really important consequences.
+
+To check the data type of a value we can use the `typeof()` function. See the examples below:
+```{r typeofexample, exercise = TRUE, eval=FALSE}
+typeof(22.45)
+typeof("hello")
+typeof(FALSE)
+```
+
+**Exercise:** Try guessing the data type of each of the following values, then check to see if you are correct using the `typeof()` function.
+
+- 3.14
+
+- 1L
+
+- 1+1i
+
+- TRUE
+
+- 'banana'
+
+- cats$weight
+
+```{r typeofexercise, exercise = TRUE, eval = FALSE, exercise.setup = "prepare-cats"}
+
+```
+
+## Resources and Citations
+This tutorial was created as supplemental material to the McNair Data Science Series. 
+
+The slides and materials were adapted directly from the [Software Carpentries](), specifically the [Data Structures workshop](https://swcarpentry.github.io/r-novice-gapminder/). 
+
+Challenges and Learnr tutorial were created by Ernestine Brannon.
